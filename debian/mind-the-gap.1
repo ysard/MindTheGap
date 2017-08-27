@@ -1,0 +1,65 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" (C) Copyright 2017 Pierre Vignet <pierre.vignet.contact@caramail.fr>,
+.\"
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH MIND-THE-GAP 1 "July 19, 2017"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+mind-the-gap \- MindTheGap performs detection and assembly of DNA insertion variants in NGS read datasets with respect to a reference genome. 
+
+.SH DESCRIPTION
+MindTheGap is a software that performs integrated detection and assembly of genomic insertion variants in NGS 
+read datasets with respect to a reference genome. It is designed to call insertions of any size, whether 
+they are novel or duplicated, homozygous or heterozygous in the donor genome.
+.br
+It takes as input a set of reads and a reference genome. It outputs two sets of FASTA sequences:
+one is the set of breakpoints of detected insertion sites, the other is the set of assembled insertions for each 
+breakpoint. For each breakpoint, MindTheGap either returns a single insertion sequence (when there is no assembly 
+ambiguity), or a set of candidate insertion sequences (due to ambiguities) or nothing at all (when the insertion 
+is too complex to be assembled).
+.br
+MindTheGap performs de novo assembly using the GATB library and inspired from algorithms from Minia. 
+Hence, the computational resources required to run MindTheGap are significantly lower than that of other assemblers 
+(for instance it uses less than 6GB of main memory for analyzing a full human NGS dataset).
+.br
+Since version 2.0.0, MindTheGap can detect other types of variants, not only insertion events. 
+These are homozygous SNPs and homozygous deletions of any size. They are detected by the find module of 
+MindTheGap and are output separately in a VCF file. Importantly, even if the user is not interested in 
+these types of variants, it is worth to detect them since it can improve the recall of the insertion event 
+detection algorithm : it is now possible to find insertion events that are located at less than k nucleotides 
+from another such variant.
+.br
+For more details on the method and some recent results, see the web page available at 
+https://gatb.inria.fr/software/mind-the-gap/
+
+.SH OPTIONS
+TODO !
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B \-v, \-\-version
+Show version of program.
+
+.SH SEE ALSO
+.BR mind-the-gap (1),
+.br
+The programs are documented fully by the Genscale Team
+available at https://gatb.inria.fr/software/mind-the-gap/
+
+.SH AUTHORS
+This manual page was written by Pierre Vignet <pierre.vignet.contact@caramail.fr>
+for the Debian project (and may be used by others).

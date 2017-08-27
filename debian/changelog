@@ -1,0 +1,14 @@
+mind-the-gap (2.0.1-2) UNRELEASED; urgency=medium
+
+  * Ability to find a compile against libgatbcore previously installed on
+  the system.
+  
+  * Remove unwanted files from install directive. 
+
+ -- Pierre Vignet <pierre.vignet.contact@caramail.fr>  Wed, 19 Jul 2017 22:44:06 +0200
+
+mind-the-gap (2.0.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Pierre Vignet <pierre.vignet.contact@caramail.fr>  Wed, 19 Jul 2017 21:37:35 +0200

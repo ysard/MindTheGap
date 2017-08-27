@@ -1,0 +1,74 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -71,7 +71,7 @@
+ SET (GATB_CORE_EXCLUDE_EXAMPLES  1)
+ 
+ # GATB CORE
+-include (GatbCore)
++find_package(gatbcore 1.3.0)
+ 
+ ################################################################################
+ # TOOL
+@@ -82,24 +82,24 @@
+ if (use_new_cxx)
+     set (CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -DUSE_NEW_CXX ")
+ endif()
+- 
++
+ message("-- cxx: ${CMAKE_CXX_FLAGS}")
+ 
+ 
+ 
+ # we get compilation definitions from the gatb-core part
+-add_definitions (${gatb-core-flags})
++add_definitions(${GATBCORE_DEFINITIONS} )
+ 
+ # SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra" )
+-SET( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
++# SET( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
+ 
+-# we give the headers directories from : 
+-#       - from project source 
++# we give the headers directories from :
++#       - from project source
+ #       - from GATB-CORE source
+-#       - from dsk source 
++#       - from dsk source
+ set (PROGRAM_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
+ 
+-include_directories (${PROGRAM_SOURCE_DIR} ${gatb-core-includes})
++include_directories (${PROGRAM_SOURCE_DIR} ${GATBCORE_INCLUDE_DIRS})
+ 
+ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+ 
+@@ -110,11 +110,11 @@
+ add_executable        (${PROJECT_NAME}  src/main.cpp ${ProjectFiles})
+ 
+ # we define which libraries to be linked with project binary
+-target_link_libraries (${PROJECT_NAME}  ${gatb-core-libraries})
++target_link_libraries (${PROJECT_NAME}  ${GATBCORE_LIBRARIES})
+ 
+ 
+ ################################################################################
+-#  PACKAGING 
++#  PACKAGING
+ ################################################################################
+ 
+ # We set the version number
+@@ -123,14 +123,14 @@
+ SET (CPACK_PACKAGE_VERSION_MAJOR        "${gatb-tool_VERSION_MAJOR}")
+ SET (CPACK_PACKAGE_VERSION_MINOR        "${gatb-tool_VERSION_MINOR}")
+ SET (CPACK_PACKAGE_VERSION_PATCH        "${gatb-tool_VERSION_PATCH}")
+-SET (CPACK_PACKAGE_VERSION              "${gatb-tool-version}")  
++SET (CPACK_PACKAGE_VERSION              "${gatb-tool-version}")
+ 
+ # We set the kind of archive
+ SET (CPACK_GENERATOR                    "TGZ")
+ SET (CPACK_SOURCE_GENERATOR             "TGZ")
+ 
+ # We ignore unwated files for the source archive
+-SET (CPACK_SOURCE_IGNORE_FILES          
++SET (CPACK_SOURCE_IGNORE_FILES
+     "^${PROJECT_SOURCE_DIR}/\\.git/"     ;
+     "^${PROJECT_SOURCE_DIR}/\\.gitmodules"  ;
+     "^${PROJECT_SOURCE_DIR}/\\.gitignore";

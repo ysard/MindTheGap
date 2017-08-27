@@ -1,0 +1,22 @@
+Source: mind-the-gap
+Section: science
+Priority: optional
+Maintainer: Pierre Vignet <pierre.vignet.contact@caramail.fr>
+Build-Depends: debhelper (>= 9), cmake
+Standards-Version: 3.9.5
+Homepage: https://github.com/GATB/MindTheGap
+#Vcs-Git: git://anonscm.debian.org/collab-maint/mind-the-gap.git
+#Vcs-Browser: http://anonscm.debian.org/?p=collab-maint/mind-the-gap.git;a=summary
+
+Package: mind-the-gap
+Architecture: any
+Recommends: gatbcore-tools
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Detection and assembly of DNA insertion variants in NGS read datasets
+ MindTheGap performs detection and assembly of DNA insertion variants in 
+ NGS read datasets with respect to a reference genome. It is designed to 
+ call insertions of any size, whether they are novel or duplicated, homozygous
+ or heterozygous in the donor genome. It takes as input a set of reads and a 
+ reference genome. It outputs two sets of FASTA sequences: one is the set of 
+ breakpoints of detected insertion sites, the other is the set of assembled 
+ insertions for each breakpoint.

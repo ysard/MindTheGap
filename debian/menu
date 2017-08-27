@@ -1,0 +1,2 @@
+?package(mind-the-gap):needs="text" section="Applications/Science/Biology"\
+  title="mind-the-gap" command="/usr/bin/mind-the-gap"
